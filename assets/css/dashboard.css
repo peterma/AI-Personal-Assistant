@@ -1,0 +1,115 @@
+/* Dashboard specific styles */
+.dashboard-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Task item styles */
+.task-item {
+    transition: background-color 0.2s ease;
+}
+
+.task-item:hover {
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Budget chart styles */
+.budget-chart {
+    height: 200px;
+    position: relative;
+}
+
+/* Note card styles */
+.note-card {
+    transition: all 0.2s ease;
+}
+
+.note-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Habit tracker styles */
+.habit-progress {
+    height: 8px;
+    border-radius: 4px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.habit-progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-4);
+    }
+
+    nav {
+        flex-wrap: wrap;
+        gap: var(--spacing-2);
+    }
+
+    nav a {
+        flex: 1;
+        min-width: calc(50% - var(--spacing-2));
+        text-align: center;
+        justify-content: center;
+    }
+
+    .dashboard-card {
+        margin-bottom: var(--spacing-4);
+    }
+
+    .budget-chart {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: var(--spacing-2);
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        width: 100%;
+    }
+
+    .dashboard-card {
+        padding: var(--spacing-4);
+    }
+
+    .task-item {
+        flex-direction: column;
+        gap: var(--spacing-2);
+    }
+}

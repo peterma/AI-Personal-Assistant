@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Assistant Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div x-data="dashboard()" class="container mx-auto px-4">        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-3xl font-bold">
+                    <i class="fas fa-home text-blue-600 mr-3"></i>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500">
+                        Personal Assistant Dashboard
+                    </span>
+                </h1>
+            </div>
+            <nav class="flex space-x-4">
+                <a href="dashboard.html" class="px-4 py-2 rounded-lg bg-blue-600 text-white flex items-center gap-2">
+                    <i class="fas fa-home"></i>Dashboard
+                </a>
+                <a href="Task_Management.html" class="px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center gap-2">
+                    <i class="fas fa-tasks"></i>Tasks
+                </a>
+                <a href="Budget_Tracker.html" class="px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center gap-2">
+                    <i class="fas fa-wallet"></i>Budget
+                </a>
+                <a href="Habit_Tracker.html" class="px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center gap-2">
+                    <i class="fas fa-check-circle"></i>Habits
+                </a>
+                <a href="Stick_Note.html" class="px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center gap-2">
+                    <i class="fas fa-sticky-note"></i>Notes
+                </a>
+            </nav>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Tasks Overview -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">
+                        <i class="fas fa-tasks mr-2 text-blue-600"></i>Upcoming Tasks
+                    </h2>
+                    <a href="Task_Management.html" class="text-blue-600 hover:text-blue-800">View All</a>
+                </div>
+                <div class="space-y-4" x-html="renderUpcomingTasks()"></div>
+            </div>
+
+            <!-- Budget Overview -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">
+                        <i class="fas fa-chart-pie mr-2 text-green-600"></i>Budget Overview
+                    </h2>
+                    <a href="Budget_Tracker.html" class="text-blue-600 hover:text-blue-800">View All</a>
+                </div>
+                <div x-html="renderBudgetOverview()"></div>
+            </div>
+
+            <!-- Recent Notes -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">
+                        <i class="fas fa-sticky-note mr-2 text-yellow-600"></i>Recent Notes
+                    </h2>
+                    <a href="Stick_Note_App.html" class="text-blue-600 hover:text-blue-800">View All</a>
+                </div>
+                <div class="space-y-4" x-html="renderRecentNotes()"></div>
+            </div>
+
+            <!-- Habits Overview -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">
+                        <i class="fas fa-chart-line mr-2 text-purple-600"></i>Daily Habits
+                    </h2>
+                    <a href="Habit_Tracker.html" class="text-blue-600 hover:text-blue-800">View All</a>
+                </div>
+                <div class="space-y-4" x-html="renderHabitsOverview()"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/demoData.js"></script>
+    <script src="assets/js/taskManager.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/themeManager.js"></script>
+</body>
+</html>

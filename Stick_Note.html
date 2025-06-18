@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sticky Notes</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/common.css" />
+    <link rel="stylesheet" href="assets/css/sticky-notes.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="mb-8">
+        <div class="flex justify-between items-center mb-4">
+          <h1 class="text-3xl font-bold">
+            <i class="fas fa-sticky-note text-yellow-500 mr-3"></i>Sticky Notes
+          </h1>
+          <a
+            href="dashboard.html"
+            class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all duration-200 flex items-center gap-2"
+          >
+            <i class="fas fa-home"></i>
+            Back to Home
+          </a>
+        </div>
+        <p class="text-gray-600">Organize your thoughts and stay productive</p>
+      </header>
+      <div class="controls">
+        <div class="search-bar">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search notes..."
+            class="form-input"
+          />
+          <button title="Search Notes" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+
+        <div class="action-buttons">
+          <button
+            id="showTemplatesBtn"
+            class="btn btn-secondary"
+            data-action="showTemplates"
+          >
+            <i class="fas fa-clipboard-list"></i>
+            Templates
+          </button>
+          <button id="addNoteBtn" class="btn btn-success" data-action="addNote">
+            <i class="fas fa-plus"></i>
+            Add New Note
+          </button>
+        </div>
+      </div>
+
+      <div class="markdown-help" id="markdownHelp">
+        <h4>Markdown Support</h4>
+        <div class="markdown-hints">
+          <div class="hint">**bold**</div>
+          <div class="hint">*italic*</div>
+          <div class="hint"># Heading 1</div>
+          <div class="hint">## Heading 2</div>
+          <div class="hint">- bullet list</div>
+          <div class="hint">`code`</div>
+          <div class="hint">[link](url)</div>
+        </div>
+      </div>
+
+      <div class="notes-grid" id="notesGrid"></div>
+
+      <div id="relatedNotes" class="related-notes">
+        <h3>Related Notes</h3>
+        <div class="related-notes-content"></div>
+      </div>
+      <div class="empty-state" id="emptyState" style="display: none">
+        <div class="empty-state-icon">
+          <i class="fas fa-clipboard-list text-gray-400 text-6xl mb-4"></i>
+        </div>
+        <h3>No notes yet</h3>
+        <p>Click "Add New Note" to create your first sticky note</p>
+      </div>
+
+      <div class="modal-overlay" id="confirmModal">
+        <div class="modal">
+          <div class="modal-header">
+            <div class="modal-icon">
+              <i class="fas fa-exclamation-triangle text-warning"></i>
+            </div>
+            <h3 class="modal-title">Confirm Delete</h3>
+          </div>
+          <div class="modal-message">
+            Are you sure you want to delete this note? This action cannot be
+            undone.
+          </div>
+          <div class="modal-actions">
+            <button
+              class="modal-btn modal-btn-cancel"
+              onclick="hideConfirmModal()"
+            >
+              Cancel
+            </button>
+            <button
+              class="modal-btn modal-btn-confirm"
+              onclick="confirmDelete()"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Templates Modal -->
+      <div class="modal-overlay" id="templatesModal">
+        <div class="modal template-modal">
+          <div class="modal-header">
+            <div class="modal-icon">
+              <i class="fas fa-clipboard-list text-primary"></i>
+            </div>
+            <h3 class="modal-title">Note Templates</h3>
+          </div>
+          <div class="templates-list" id="templatesList">
+            <!-- Templates will be dynamically added here -->
+          </div>
+          <div class="template-form">
+            <h4>Create New Template</h4>
+            <input
+              type="text"
+              id="templateName"
+              placeholder="Template Name"
+              class="template-input"
+            />
+            <textarea
+              id="templateContent"
+              placeholder="Template Content"
+              class="template-content"
+            ></textarea>
+            <div class="modal-actions">
+              <button
+                class="modal-btn modal-btn-cancel"
+                onclick="hideTemplatesModal()"
+              >
+                Close
+              </button>
+              <button class="modal-btn modal-btn-save" onclick="saveTemplate()">
+                Save Template
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/demoData.js"></script>
+    <script src="assets/js/noteManager.js"></script>
+    <script src="assets/js/themeManager.js"></script>
+  </body>
+</html>

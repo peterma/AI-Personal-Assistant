@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/common.css" />
+    <style>
+      /* Custom styles for Inter font and general body styling */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f3f4f6; /* Light gray background */
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Align to top for better content flow */
+        min-height: 100vh;
+        padding: 2rem; /* Add some padding around the content */
+        box-sizing: border-box;
+      }
+
+      /* Ensure the main container doesn't get too wide on large screens */
+      .max-w-md {
+        max-width: 42rem; /* Slightly wider than default Tailwind md for better readability */
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="habit-tracker-main">
+      <header class="mb-8">
+        <div class="flex justify-between items-center mb-4">
+          <h1 class="text-3xl font-bold">
+            <i class="fas fa-check-circle text-purple-600 mr-3"></i>Habit
+            Tracker
+          </h1>
+          <a
+            href="dashboard.html"
+            class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all duration-200 flex items-center gap-2"
+          >
+            <i class="fas fa-home"></i>
+            Back to Home
+          </a>
+        </div>
+        <p class="text-gray-600">Build better habits, achieve your goals</p>
+      </header>
+
+      <div class="flex flex-col sm:flex-row gap-4 mb-6">
+        <input
+          type="text"
+          id="habitInput"
+          placeholder="Add a new habit..."
+          class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
+        />
+        <button
+          id="addHabitBtn"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+        >
+          Add Habit
+        </button>
+      </div>
+
+      <ul id="habitList" class="habit-list"></ul>
+    </div>
+    <script src="assets/js/demoData.js"></script>
+    <script src="assets/js/habitTracker.js" defer></script>
+    <script src="assets/js/themeManager.js"></script>
+  </body>
+</html>

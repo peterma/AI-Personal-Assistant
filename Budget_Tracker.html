@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/budgetTracker.css">
+</head>
+<body>
+    <div class="container">
+        <header class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-3xl font-bold">
+                    <i class="fas fa-wallet text-green-600 mr-3"></i>Budget Tracker
+                </h1>
+                <a href="dashboard.html" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all duration-200 flex items-center gap-2">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </a>
+            </div>
+            <p class="text-gray-600">Take control of your finances</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="card card-compact">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-arrow-up text-success"></i>
+                        Total Income
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="balance-amount income text-2xl font-bold" id="totalIncome">$0.00</div>
+                    <div class="progress-bar mt-4">
+                        <div class="progress income-progress" id="incomeProgress"></div>
+                    </div>
+                    <small class="text-sm text-gray-600">vs Monthly Goal</small>
+                </div>
+            </div>
+            <div class="card card-compact">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-arrow-down text-danger"></i>
+                        Total Expenses
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="balance-amount expense text-2xl font-bold" id="totalExpenses">$0.00</div>
+                    <div class="progress-bar mt-4">
+                        <div class="progress expense-progress" id="expenseProgress"></div>
+                    </div>
+                    <small class="text-sm text-gray-600">vs Budget Limit</small>
+                </div>
+            </div>
+            <div class="card card-compact" id="balanceCard">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-wallet text-primary"></i>
+                        Current Balance
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="balance-amount balance text-2xl font-bold" id="currentBalance">$0.00</div>
+                    <div class="savings-rate mt-4 text-success" id="savingsRate">Savings Rate: 0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="insights-section">
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3>Monthly Overview</h3>
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Category Breakdown</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="budget-goals">
+                <h3>Monthly Budget Goals</h3>
+                <form id="budgetGoalsForm">
+                    <div class="goals-grid">
+                        <div class="goal-item">
+                            <label for="incomeGoal">Income Goal</label>
+                            <input type="number" id="incomeGoal" min="0" step="100">
+                        </div>
+                        <div class="goal-item">
+                            <label for="savingsGoal">Savings Goal (%)</label>
+                            <input type="number" id="savingsGoal" min="0" max="100" step="1">
+                        </div>
+                        <div class="goal-item" style="grid-column: 1 / -1;">
+                            <label>Category Budget Limits</label>
+                            <div id="categoryBudgets" class="category-budgets">
+                                <!-- Dynamically populated -->
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Goals</button>
+                </form>
+            </div>
+
+            <div class="spending-insights">
+                <h3>Smart Insights</h3>
+                <div class="insights-grid" id="insightsContainer">
+                    <div class="insight-card" id="spendingTrends">
+                        <h4>Spending Trends</h4>
+                        <div class="trends-content">Loading trends...</div>
+                    </div>
+                    <div class="insight-card" id="recommendations">
+                        <h4>Budget Recommendations</h4>
+                        <div class="recommendations-content">Analyzing your spending patterns...</div>
+                    </div>
+                    <div class="insight-card" id="savingsInsights">
+                        <h4>Savings Potential</h4>
+                        <div class="savings-content">Calculating savings opportunities...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-8">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-plus-circle"></i>
+                    Add Transaction
+                </h3>
+            </div>
+            <div class="card-body">
+                <form id="transactionForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Amount</label>
+                            <input type="number" id="amount" class="form-input" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select id="category" class="form-select">
+                                <option value="">Select a category...</option>
+                                <option value="rent_mortgage">Rent/Mortgage</option>
+                                <option value="food">Food</option>
+                                <option value="transport">Transport</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="health">Health</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <input type="text" id="description" class="form-input" placeholder="What's this transaction for?">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" id="transactionDate" class="form-input">
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success btn-income" data-type="income">
+                                <i class="fas fa-plus"></i>
+                                Add Income
+                            </button>
+                            <button type="button" class="btn btn-danger btn-expense" data-type="expense">
+                                <i class="fas fa-minus"></i>
+                                Add Expense
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-history"></i>
+                    Recent Transactions
+                </h3>
+            </div>
+            <div class="card-body">
+                <div id="transactionsList">
+                    <div class="empty-state text-center p-8">
+                        <i class="fas fa-receipt text-gray-400 text-6xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">No transactions yet</h3>
+                        <p class="text-gray-600">Add your first transaction using the form above</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load dependencies first -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/demoData.js"></script>
+    <!-- Then load our app code -->
+    <script src="assets/js/budgetTracker.js"></script>
+    <script src="assets/js/themeManager.js"></script>
+</body>
+</html>
